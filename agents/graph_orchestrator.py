@@ -2,7 +2,6 @@
 from typing import TypedDict
 import pandas as pd
 from langgraph.graph import StateGraph, END
-from chromadb import Client
 
 from agents.profile_agent import profile_dataset
 from agents.retrieval_agent import retrieve_rules
@@ -36,8 +35,11 @@ def profile_node(state: AgentState) -> AgentState:
 
 
 def retrieval_node(state: AgentState) -> AgentState:
-    chroma_client = Client()
-    rules, fallback = retrieve_rules(state["profile"], chroma_client)
+    if state.get("progress_callback"):
+        state["progress_callback"]("Retrieving Rules")
+    
+    # Remove: chroma_client = Client()
+    rules, fallback = retrieve_rules(state["profile"], None)  # Pass None instead
     state["rules"] = rules
     state["fallback"] = fallback
     return state
