@@ -1,4 +1,4 @@
-# AutoML Assistant (Tabular) — with RAG + Safe Execution
+# AutoML Assistant (Tabular)  with RAG + Safe Execution
 
 Streamlit app that builds a full ML pipeline for a CSV (or Kaggle dataset) end-to-end:
 1) profile data
